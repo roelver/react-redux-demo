@@ -5,7 +5,9 @@ const reducer = (state , action) => {
            return { ...state, counter: state.counter + action.payload};
         case 'DECREASE': 
            return { ...state, counter: state.counter - action.payload};
-        case 'RESET': 
+        case 'FETCH_INCREASE': 
+           return { ...state, counter: state.counter + action.payload};
+        case 'RESET':
            return { ...state, counter: action.payload};
         default: return state;
     }

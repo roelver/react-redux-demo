@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import {increase, decrease, reset } from './actions/app';
+import {increase, decrease, reset, fetchIncrease } from './actions/app';
 import logo from './logo.svg';
 import './App.css';
 import Child, {preferredGreeting}  from './Child';
@@ -27,7 +27,7 @@ class App extends Component {
   handleResetClick() {
     this.props.reset(0);    
   }
-
+  
   handleDecreaseClick(factor = 1) {
     const num = Math.ceil(Math.random() * 5);
     this.props.decrease(num * factor);
@@ -36,6 +36,11 @@ class App extends Component {
     const num = Math.ceil(Math.random() * 20);
     this.props.increase(num * factor);
   }
+  handleFetchIncreaseAPIClick() {
+    this.props.fetchIncrease();    
+  }
+
+
   render() {
     return (
       <div className="App">
@@ -52,6 +57,7 @@ class App extends Component {
           <button className="big-button" onClick={() => this.handleDecreaseClick(3)}>-</button>
           <span className="headline">The counter is: {this.props.counter}</span>
           <span className="headline">Previous value was: {this.state.oldCounter}</span>
+          <button className="bigger-button" onClick={() => this.handleFetchIncreaseAPIClick()}>from API</button>
           <button className="big-button" onClick={() => this.handleIncreaseClick(3)}>+</button>
         </div>
         <Simple text="Hello" color="red" space={`${this.props.counter/ 5}px`}/>
@@ -72,4 +78,4 @@ const mapStateToProps = (state) => {
     counter: state.counter
   }
 }
-export default connect(mapStateToProps, {increase, decrease, reset})(App);
+export default connect(mapStateToProps, {increase, decrease, reset, fetchIncrease})(App);
